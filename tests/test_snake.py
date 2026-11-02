@@ -66,3 +66,12 @@ def test_game_over():
     game.snake.body = [(9,5)]
     game.step((1,0))
     assert game._game_over == True
+
+def test_lvl_up():
+    game = Game(10,10,1)
+    while game.score !=5 and game._game_over == False:
+        head = game.snake.head()
+        game.food = (head[0]+1,head[1])
+        game.step((1,0))
+    assert game.level == 2
+    assert game.speed == 2    
