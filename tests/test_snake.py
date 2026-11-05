@@ -41,20 +41,20 @@ def test_with_collisions():
 
 def test_good_food():
     game = Game(10,10, 1)
-    assert 0 <= game.food[0] < 10
-    assert 0 <= game.food[1] < 10
+    assert 1 <= game.food[0] < 10
+    assert 1 <= game.food[1] < 10
     assert game.food not in game.snake.body
 
 def test_step():
     game = Game(10,10,1)
     game.step((1,0))            
-    assert game.snake.head() == (6,5)
+    assert game.snake.head() == (7,6)
     assert game.score == 0
     assert game._game_over == False
 
 def test_eat_food():
     game = Game(10,10,1)
-    game.food = (6,5)
+    game.food = (7,6)
     initial_len = len(game.snake.body)
     game.step((1,0))
     assert game.score == 1
@@ -63,13 +63,13 @@ def test_eat_food():
 
 def test_game_over():
     game = Game(10,10,1)
-    game.snake.body = [(9,5)]
+    game.snake.body = [(10,5)]
     game.step((1,0))
     assert game._game_over == True
 
 def test_lvl_up():
-    game = Game(10,10,1)
-    while game.score !=5 and game._game_over == False:
+    game = Game(25,25,1)
+    while game.score !=10 and game._game_over == False:
         head = game.snake.head()
         game.food = (head[0]+1,head[1])
         game.step((1,0))
