@@ -1,5 +1,7 @@
 import random
+
 from snake.snake import Snake
+
 POINTS_FOR_LVLUP = 10
 MAX_SPEED = 3
 
@@ -16,7 +18,7 @@ class Game:
         self.speed: int = speed
         self.snake = Snake((w//2, h//2), (1,0))
         self.score = 0
-        self.level = 1  
+        self.level = 1
         self._game_over = False
         self.food = (0,0)
         self.spawn_food()
@@ -24,7 +26,7 @@ class Game:
     def spawn_food(self) -> None:
         while True:
             y = random.randint(1, self.height - 2)
-            x = random.randint(1, self.width - 2)    
+            x = random.randint(1, self.width - 2)
             if (x,y) not in self.snake.body:
                 self.food = (x,y)
                 break
@@ -40,10 +42,11 @@ class Game:
                 if self.speed < MAX_SPEED:
                     self.speed += 1
             self.spawn_food()
-        self.snake.move(direction[0], direction[1]) 
-        head = self.snake.head()  
-        if (head[0] < 1 or head[0] >= (self.width -1) or head[1] < 1 or head[1] >= (self.height - 1)):
+        self.snake.move(direction[0], direction[1])
+        head = self.snake.head()
+        if (head[0] < 1 or head[0] >= (self.width -1) or
+            head[1] < 1 or head[1] >= (self.height - 1)):
             self._game_over = True
         if self.snake.collides_self():
-            self._game_over = True            
+            self._game_over = True
 

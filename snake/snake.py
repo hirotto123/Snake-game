@@ -6,7 +6,7 @@ class Snake:
 
     def head(self) -> tuple[int, int]:
         return self.body[0]
-    
+
     def move(self, dx: int, dy: int) -> None:
         current_head = self.body[0]
         new_head = (current_head[0] + dx, current_head[1] + dy)
@@ -17,7 +17,7 @@ class Snake:
             self.body.pop()
 
     def grow(self) -> None:
-        self._should_grow = True        
+        self._should_grow = True
 
     def collides_self(self) -> bool:
         head = self.body[0]
