@@ -1,6 +1,7 @@
 from snake.snake import Snake
 from snake.game import Game
 
+"""Test for snake game logic"""
 def test_move_right():
     snake = Snake((3,3),(1,0))
     snake.move(1,0)

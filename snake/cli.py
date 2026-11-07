@@ -1,12 +1,13 @@
+import argparse
 import msvcrt
 import os
 import time
-import argparse
 
 from snake.game import Game
 
-
+"""Console interface for snake game"""
 def draw(game: Game) -> None:
+        """Render the current game state to the terminal"""
         for y in range(0, game.height):
                 for x in range(0, game.width):
                         if (x,y) == game.snake.head():
@@ -56,7 +57,7 @@ if __name__ == '__main__':
                                                 if (current_direction[0] + direction[0],
                                                     current_direction[1] + direction[1]) != (0,0):
                                                  current_direction = direction
-                        if not paused:                         
+                        if not paused:
                                 game.step(current_direction)
                                 os.system('cls' if os.name == 'nt' else 'clear')
                                 draw(game)
@@ -64,10 +65,10 @@ if __name__ == '__main__':
                         else:
                                 print("ПАУЗА")
                                 print("Нажмите 'P' для продолжения")
-                                time.sleep(1)  
+                                time.sleep(1)
                 if game.is_victory:
-                        print('Победа!')                      
-                else:        
+                        print('Победа!')
+                else:
                         print('Game Over', f"Score: {game.score}, Level: {game.level}")
                 answer = input('Can you start again?(Y/N):')
                 if answer.upper() != "Y":

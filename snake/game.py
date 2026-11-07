@@ -4,18 +4,22 @@ from snake.snake import Snake
 
 POINTS_FOR_LVLUP = 10
 MAX_SPEED = 3
-
+"""Game module. Field, spawn food, scoring, lvl and win/lose conditions"""
 class Game:
     @property
     def delay(self) -> float:
+        """Return delay in second beetwen step based on current speed"""
         return 1.0/self.speed
     @property
     def is_over(self) -> bool:
+        """Return true if game is over"""
         return self._game_over
     @property
     def is_victory(self) -> bool:
+        """Return true if game is win"""
         return self._victory
     def __init__(self, w: int, h: int, speed: int) -> None:
+        """Create a new game, given starting speed"""
         self.width: int = w + 2
         self.height: int = h + 2
         self.speed: int = speed
@@ -28,6 +32,7 @@ class Game:
         self.spawn_food()
 
     def spawn_food(self) -> None:
+        """Spawn food on random place"""
         while True:
             y = random.randint(1, self.height-2)
             x = random.randint(1, self.width-2)
@@ -36,6 +41,7 @@ class Game:
                 break
 
     def step(self, direction: tuple[int, int]) -> None:
+        """Execute one game step: move snake, check food, collisions and victory"""
         head = self.snake.head()
         new_head = (head[0] + direction[0], head[1] + direction[1])
         ate_food = new_head == self.food
@@ -57,5 +63,5 @@ class Game:
             head[1] < 1 or head[1] >= (self.height - 1)):
             self._game_over = True
         if self.snake.collides_self():
-            self._game_over = True    
+            self._game_over = True
 
