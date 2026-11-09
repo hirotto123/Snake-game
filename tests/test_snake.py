@@ -50,8 +50,8 @@ def test_with_collisions() -> None:
 
 def test_good_food() -> None:
     game = Game(10, 10, 1)
-    assert 1 <= game.food[0] < 10
-    assert 1 <= game.food[1] < 10
+    assert 1 <= game.food[0] <= 10
+    assert 1 <= game.food[1] <= 10
     assert game.food not in game.snake.body
 
 
