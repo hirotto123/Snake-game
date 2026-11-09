@@ -1,6 +1,8 @@
 """Snake module. Movement, growth and self-collision detection"""
+
+
 class Snake:
-    def __init__(self,start_pos: tuple[int, int], direction: tuple [int, int]):
+    def __init__(self, start_pos: tuple[int, int], direction: tuple[int, int]):
         """Initialise the snake at start_pos moving in direction"""
         self.body: list[tuple[int, int]] = [start_pos]
         self.direction: tuple[int, int] = direction

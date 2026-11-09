@@ -5,39 +5,44 @@ from snake.snake import Snake
 POINTS_FOR_LVLUP = 10
 MAX_SPEED = 3
 """Game module. Field, spawn food, scoring, lvl and win/lose conditions"""
+
+
 class Game:
     @property
     def delay(self) -> float:
         """Return delay in second beetwen step based on current speed"""
-        return 1.0/self.speed
+        return 1.0 / self.speed
+
     @property
     def is_over(self) -> bool:
         """Return true if game is over"""
         return self._game_over
+
     @property
     def is_victory(self) -> bool:
         """Return true if game is win"""
         return self._victory
+
     def __init__(self, w: int, h: int, speed: int) -> None:
         """Create a new game, given starting speed"""
         self.width: int = w + 2
         self.height: int = h + 2
         self.speed: int = speed
-        self.snake = Snake(((w+2)//2, (h+2)//2), (1,0))
+        self.snake = Snake(((w + 2) // 2, (h + 2) // 2), (1, 0))
         self.score = 0
         self.level = 1
         self._game_over = False
         self._victory = False
-        self.food = (0,0)
+        self.food = (0, 0)
         self.spawn_food()
 
     def spawn_food(self) -> None:
         """Spawn food on random place"""
         while True:
-            y = random.randint(1, self.height-2)
-            x = random.randint(1, self.width-2)
-            if (x,y) not in self.snake.body:
-                self.food = (x,y)
+            y = random.randint(1, self.height - 2)
+            x = random.randint(1, self.width - 2)
+            if (x, y) not in self.snake.body:
+                self.food = (x, y)
                 break
 
     def step(self, direction: tuple[int, int]) -> None:
@@ -53,15 +58,18 @@ class Game:
                 if self.speed < MAX_SPEED:
                     self.speed += 1
         self.snake.move(direction[0], direction[1])
-        if len(self.snake.body) == (self.width - 2)*(self.height -2):
-                    self._victory = True
-                    self._game_over = True
+        if len(self.snake.body) == (self.width - 2) * (self.height - 2):
+            self._victory = True
+            self._game_over = True
         if ate_food and not self._game_over:
             self.spawn_food()
         head = self.snake.head()
-        if (head[0] < 1 or head[0] >= (self.width -1) or
-            head[1] < 1 or head[1] >= (self.height - 1)):
+        if (
+            head[0] < 1
+            or head[0] >= (self.width - 1)
+            or head[1] < 1
+            or head[1] >= (self.height - 1)
+        ):
             self._game_over = True
         if self.snake.collides_self():
             self._game_over = True
-
