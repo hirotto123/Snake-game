@@ -4,28 +4,28 @@ from snake.snake import Snake
 """Test for snake game logic"""
 
 
-def test_move_right():
+def test_move_right() -> None:
     snake = Snake((3, 3), (1, 0))
     snake.move(1, 0)
     head = snake.head()
     assert head == (4, 3)
 
 
-def test_move_up():
+def test_move_up() -> None:
     snake = Snake((3, 3), (0, -1))
     snake.move(0, -1)
     head = snake.head()
     assert head == (3, 2)
 
 
-def test_move_down():
+def test_move_down() -> None:
     snake = Snake((3, 3), (0, 1))
     snake.move(0, 1)
     head = snake.head()
     assert head == (3, 4)
 
 
-def test_grow():
+def test_grow() -> None:
     snake = Snake((1, 1), (1, 0))
     snake.move(1, 0)
     snake.grow()
@@ -34,7 +34,7 @@ def test_grow():
     assert snake.body == [(3, 1), (2, 1)]
 
 
-def test_without_collisions():
+def test_without_collisions() -> None:
     snake = Snake((1, 1), (1, 0))
     snake.move(1, 0)
     snake.grow()
@@ -42,20 +42,20 @@ def test_without_collisions():
     assert not snake.collides_self()
 
 
-def test_with_collisions():
+def test_with_collisions() -> None:
     snake = Snake((1, 1), (1, 0))
     snake.body = [(1, 1), (1, 0), (1, 1)]
     assert snake.collides_self()
 
 
-def test_good_food():
+def test_good_food() -> None:
     game = Game(10, 10, 1)
     assert 1 <= game.food[0] < 10
     assert 1 <= game.food[1] < 10
     assert game.food not in game.snake.body
 
 
-def test_step():
+def test_step() -> None:
     game = Game(10, 10, 1)
     game.step((1, 0))
     assert game.snake.head() == (7, 6)
@@ -63,7 +63,7 @@ def test_step():
     assert not game._game_over
 
 
-def test_eat_food():
+def test_eat_food() -> None:
     game = Game(10, 10, 1)
     game.food = (7, 6)
     initial_len = len(game.snake.body)
@@ -73,14 +73,14 @@ def test_eat_food():
     assert game.food != (6, 5)
 
 
-def test_game_over():
+def test_game_over() -> None:
     game = Game(10, 10, 1)
     game.snake.body = [(10, 5)]
     game.step((1, 0))
     assert game._game_over
 
 
-def test_lvl_up():
+def test_lvl_up() -> None:
     game = Game(25, 25, 1)
     while game.score != 10 and not game._game_over:
         head = game.snake.head()
