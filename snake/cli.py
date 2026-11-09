@@ -47,13 +47,13 @@ if __name__ == "__main__":
         draw(game)
         time.sleep(game.delay)
         while not game.is_over:
-            if msvcrt.kbhit():
-                key = msvcrt.getch()
+            if msvcrt.kbhit(): # type: ignore[attr-defined]
+                key = msvcrt.getch() # type: ignore[attr-defined]
                 if key in (b"P", b"p"):
                     paused = not paused
                     continue
                 if not paused and key == b"\xe0":
-                    key = msvcrt.getch()
+                    key = msvcrt.getch() # type: ignore[attr-defined]
                     direction = DIRECTIONS.get(key)
                     if direction is not None:
                         if (
